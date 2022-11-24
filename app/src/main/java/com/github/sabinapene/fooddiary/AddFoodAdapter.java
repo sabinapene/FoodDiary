@@ -32,11 +32,7 @@ public class AddFoodAdapter extends RecyclerView.Adapter<AddFoodAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-
-
         holder.addfoodtextview.setText(foods.get(position).getName()+" : "+foods.get(position).getCalories()+" calories ");
-
-
     }
 
     @Override
@@ -51,9 +47,7 @@ public class AddFoodAdapter extends RecyclerView.Adapter<AddFoodAdapter.ViewHold
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             addfoodtextview = itemView.findViewById(R.id.addfoodtextview);
-
         }
-
     }
 
 }

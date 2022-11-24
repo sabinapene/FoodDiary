@@ -62,6 +62,10 @@ public class DailyEntryAdapter extends RecyclerView.Adapter<DailyEntryAdapter.Vi
                     ActivityEntryPage.setEntryDate(currentDailyEntry.getDate());
                     ActivityEntryPage.setEntryID(currentDailyEntry.getEntryID());
 
+                    Intent foodIntent = new Intent(itemView.getContext(), ActivityAddFoodPage.class);
+                    foodIntent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    v.getContext().startActivity(foodIntent);
+
                     Intent intent = new Intent(itemView.getContext(), ActivityEntryPage.class);
                     v.getContext().startActivity(intent);
                 }

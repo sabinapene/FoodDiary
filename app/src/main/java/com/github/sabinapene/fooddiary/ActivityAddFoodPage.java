@@ -1,6 +1,10 @@
 package com.github.sabinapene.fooddiary;
 
+import static android.content.ContentValues.TAG;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,7 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.github.sabinapene.fooddiary.Models.DailyEntry;
+import com.github.sabinapene.fooddiary.Models.EntryFood;
 import com.github.sabinapene.fooddiary.Models.Food;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,24 +26,31 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 public class ActivityAddFoodPage extends AppCompatActivity {
 
     RecyclerView recyclerView;
 
-    //firebase authentification
+    //firebase
     private FirebaseDatabase db;
 
-    private ArrayList<Food> foods = new ArrayList<Food>();
+    private static ArrayList<Food> foods = new ArrayList<Food>();
 
     DatabaseReference reference;
     AddFoodAdapter adapter;
     Food currentFood=null;
     int grams=0;
+    static String entryDate="";
 
+        public static void setEntryDate(String date){
+            entryDate = date;
+        }
 
+        public static ArrayList<Food> getFoods(){ return  foods; }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +66,40 @@ public class ActivityAddFoodPage extends AppCompatActivity {
 
 
         findViewById(R.id.addbutton).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(currentFood!=null && grams!=0){
+            @Override
+            public void onClick(View v) {//iterate through views and foods, they have the same count and order
+                    EntryFood entryFood = null;
+                    for (int i = 0; i < recyclerView.getChildCount(); i++)
+                    {
+                        //recyclerView.getChildAt(i);
 
+                        Food food = foods.get(i);
+                        String stringGrams = ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.addfoodedittext)).getText().toString();
+
+                        if(!stringGrams.equals("")){
+
+
+                            //String name = food.getName();
+
+                            /*try {
+                                Log.d(TAG, "p"+String.valueOf(Integer.parseInt(stringGrams)));
+                            } catch (NumberFormatException e) {
+                                Log.w(TAG, "Key entered isn't Integer");
+                            }*/
+                            //int grrr = Integer.parseInt(stringGrams);
+                            entryFood = new EntryFood(entryDate, food.getName(), Integer.parseInt( stringGrams ));
+                            }
                     }
-                }});
+                    if(entryFood!=null){
+                        addEntryFoodFirebase(entryFood);
+                        }
+            }
+
+        });
+
+
+
+
     }
 
 
@@ -68,8 +110,8 @@ public class ActivityAddFoodPage extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
+                    foods.clear();
                     for (DataSnapshot ds: dataSnapshot.getChildren()){
-
 
                         Food food = ds.getValue(Food.class);
                         //Food food = new Food("berries", 100);
@@ -98,12 +140,36 @@ public class ActivityAddFoodPage extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    public void setCurrentFood(Food currentFood){
-        this.currentFood = currentFood;
-    }
+    private void addEntryFoodFirebase(EntryFood foo) {
 
-    public void setGrams(int grams){
-        this.grams = grams;
+        //initialising firebase
+        db = FirebaseDatabase.getInstance();
+
+
+        //add to firebase
+        DatabaseReference reference1 = db.getReference("EntryFoodsList");
+        reference1.push().setValue(foo)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        //entryFood added successfully
+                        Toast.makeText(ActivityAddFoodPage.this, "Food added ", Toast.LENGTH_SHORT).show();
+
+                        //open ActivityEntryPage
+                        //startActivity(new Intent(ActivityAddFoodPage.this, ActivityEntryPage.class));
+                        finish();
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        //entry added failure
+                        Toast.makeText(ActivityAddFoodPage.this, "Error", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
     }
 
 }

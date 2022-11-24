@@ -2,6 +2,7 @@ package com.github.sabinapene.fooddiary.Models;
 
 public class EntryFood {
 
+    private String id="";
     private String foodName ="";
     private String entryDate ="";
     private int grams = -1;
@@ -21,6 +22,14 @@ public class EntryFood {
 
     public void setFoodName(String name) {
         this.foodName = name;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public int getGrams() {

@@ -1,5 +1,10 @@
 package com.github.sabinapene.fooddiary;
 
+
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,7 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.github.sabinapene.fooddiary.Models.DailyEntry;
 import com.github.sabinapene.fooddiary.Models.EntryFood;
 import com.github.sabinapene.fooddiary.Models.Food;
-import com.google.firebase.auth.FirebaseAuth;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.components.ComponentRuntime;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,19 +29,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class ActivityEntryPage extends AppCompatActivity {
 
     static String staticEntryId = "-1";
     static String entryDate = "";
     static String entryID="";
+    static String foodDetele="";
 
     private DailyEntry currentEntry;
     RecyclerView recyclerView;
 
-    //firebase authentification
     private FirebaseDatabase db;
 
     private ArrayList<Food> foods= new ArrayList<>();
@@ -44,7 +48,6 @@ public class ActivityEntryPage extends AppCompatActivity {
 
 
     DatabaseReference reference;
-    DatabaseReference foodReference;
     EntryFoodsAdapter adapter;
 
 
@@ -55,21 +58,20 @@ public class ActivityEntryPage extends AppCompatActivity {
         setContentView(R.layout.activity_entry_page);
         recyclerView = findViewById(R.id.rv);
 
-        //initialising firebase authentification
+        //initialising firebase authentication
         db = FirebaseDatabase.getInstance();
         reference = db.getReference("EntryFoodsList");
-        foodReference = db.getReference("Foods");
 
-        //foodsReference = db.getReference();
         entryFoods.clear();
 
         EntryFood entryFood1 = new EntryFood("17-11-2022 10:04:07","berry", 100);
         entryFoods.add(entryFood1);
 
-        Food food1 = new Food("berry", 57);
-        foods.add(food1);
+        //Food food1 = new Food("berry", 57);
+        //foods.add(food1);
 
         retrieveData();
+        retrieveFoodListData();
 
         TextView textView = findViewById(R.id.entrytextView);
         textView.setText(entryDate);
@@ -80,6 +82,7 @@ public class ActivityEntryPage extends AppCompatActivity {
                     // Floating Act Btn Action goes here
                     Intent intent = new Intent(getApplicationContext(), ActivityAddFoodPage.class);
                     v.getContext().startActivity(intent);
+                    ActivityAddFoodPage.setEntryDate(entryDate);
                 }});
     }
 
@@ -91,9 +94,38 @@ public class ActivityEntryPage extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
+                    entryFoods.clear();
                     for (DataSnapshot ds: dataSnapshot.getChildren()){
 
                         EntryFood foo = ds.getValue(EntryFood.class);
+                        foo.setId(ds.getKey());
+                        entryFoods.add(foo);
+                    }
+                }
+                validate();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(ActivityEntryPage.this, "Connection Error", Toast.LENGTH_SHORT).show();
+            }
+        };
+        reference.addValueEventListener(valueEventListener);
+    }
+
+
+    /*private void retrieveData(){
+        ValueEventListener valueEventListener = new ValueEventListener()
+        {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    entryFoods.clear();
+                    for (DataSnapshot ds: dataSnapshot.getChildren()){
+
+                        EntryFood foo = ds.getValue(EntryFood.class);
+                        foo.setId(ds.getKey());
                         entryFoods.add(foo);
 
                     }
@@ -105,42 +137,39 @@ public class ActivityEntryPage extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(ActivityEntryPage.this, "Connection Error", Toast.LENGTH_SHORT).show();
-
             }
         };
-
         reference.addValueEventListener(valueEventListener);
-
-
-    }
+    }*/
 
     private void retrieveFoodListData(){
+        DatabaseReference reference1 = db.getReference("EntryFoodsList");
+
         ValueEventListener valueEventListener2 = new ValueEventListener()
         {
-
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.exists()){
                     foods.clear();
                     for (DataSnapshot ds: dataSnapshot.getChildren()){
-
                         Food food = ds.getValue(Food.class);
                         foods.add(food);
                     }
-
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(ActivityEntryPage.this, "Connection Error", Toast.LENGTH_SHORT).show();
-
             }
         };
 
-        foodReference.addValueEventListener(valueEventListener2);
+        reference1.addValueEventListener(valueEventListener2);
 
+        ArrayList<Food> foodTemp = ActivityAddFoodPage.getFoods();
+        Log.i("Tagretireve", String.valueOf(foodTemp.size()));
 
+        //foods = ActivityAddFoodPage.getFoods();
     }
 
 
@@ -156,6 +185,8 @@ public class ActivityEntryPage extends AppCompatActivity {
                 }
             }
             retrieveFoodListData();
+            Log.i("Tag43456", String.valueOf(foods.size()));
+
         }
         else{
             Toast.makeText(ActivityEntryPage.this, "No food", Toast.LENGTH_SHORT).show();
@@ -168,19 +199,16 @@ public class ActivityEntryPage extends AppCompatActivity {
     }
 
 
-    /*private void deletePlayers(){
+    private void deleteEntryFood(){
 
-        //iterate players
-        for (int i = 0; i < currentPlayers.size(); i++)
-        {
-            Player player = currentPlayers.get(i);
-            String playerID = player.getID();
             //delete from firebase
-            reference.child(playerID).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+       /* db.getReference().child("EntryFoodsList").child(foodDetele).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+            //reference.child(foodDetele).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
                     //score cleared successfully
-                    Toast.makeText(getApplicationContext(), "Table Cleared", Toast.LENGTH_SHORT).show();
+
+                    Toast.makeText(getApplicationContext(), "Food removed", Toast.LENGTH_SHORT).show();
 
 
                 }
@@ -192,11 +220,10 @@ public class ActivityEntryPage extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
 
                         }
-                    });
+                    });*/
 
-
-        }
-    }*/
+        Log.i("deleteTag", String.valueOf(foodDetele));
+    }
 
     public static void setEntryId(String newEntryId){
         staticEntryId = newEntryId;
@@ -210,11 +237,15 @@ public class ActivityEntryPage extends AppCompatActivity {
         entryID = newEntryID;
     }
 
-    /*@Override
+    public static void setFoodDelete(String newFoodDelete){
+        foodDetele = newFoodDelete;
+    }
+
+   @Override
     public boolean onCreateOptionsMenu(Menu menu)   {
 
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.scoremenu, menu);
+        menuInflater.inflate(R.menu.entrymenu, menu);
         return true;
 
     }
@@ -225,69 +256,13 @@ public class ActivityEntryPage extends AppCompatActivity {
 
         switch (item.getItemId())
         {
-            case R.id.resetScoreItem:
-
-                //iterate through views and players, they have the same count and order
-                for (int i = 0; i < recyclerView.getChildCount(); i++)
-                {
-                    Player player = currentPlayers.get(i);
-
-                    //update in firebase
-                    reference.child(player.getID()).child("score").setValue(0).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            //score reseted successfully
-                            Toast.makeText(getApplicationContext(), "Score Reseted", Toast.LENGTH_SHORT).show();
-
-                        }
-                    })
-                            .addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    //failure
-                                    Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
-
-                                }
-                            });
-
-
-                }
+            case R.id.deleteEntryItem:
+                deleteEntryFood();
                 break;
-
-            case R.id.clearTableItem:
-               deletePlayers();
-                break;
-
-            case R.id.deleteGameItem:
-                deletePlayers();
-
-                //delete from firebase
-                db.getReference("games").child(gameID).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void unused) {
-                        //score cleared successfully
-                        Toast.makeText(getApplicationContext(), "Game deleted", Toast.LENGTH_SHORT).show();
-
-                        //open main activity
-                        finish();
-
-                    }
-                })
-                        .addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                //failure
-                                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
-
-                            }
-                        });
-                break;
-
         }
 
         return super.onOptionsItemSelected(item);
-
-    }*/
+    }
 
 
 

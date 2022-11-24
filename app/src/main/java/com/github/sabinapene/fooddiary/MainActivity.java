@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
 
-    //firebase authentification
+    //firebase authentication
     private FirebaseAuth firebaseAuth;
     private FirebaseDatabase db;
     private ArrayList<DailyEntry> entries = new ArrayList<DailyEntry>();
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.rv);
 
 
-        //initialising firebase authentification
+        //initialising firebase authentication
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance();
         reference = db.getReference("DailyEntries");
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
                 addEntryFirebase();
 
-               Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 v.getContext().startActivity(intent);
             }});
 
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void addEntryFirebase() {
 
-        //initialising firebase authentification
+        //initialising firebase authentication
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance();
 

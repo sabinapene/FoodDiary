@@ -15,10 +15,6 @@ public class Food {
         this.calories = calories;
     }
 
-    public int calculateCalories(int addCalories){
-        return calories =+addCalories;
-    }
-
     public String getName() {
         return name;
     }
