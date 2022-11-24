@@ -1,6 +1,7 @@
 # FoodDiary
 
-The application has been coded by myself
+The application has been coded by myself using android studio (Java) 
+and Firebase (Dealtime Database and Authentication)
 
 *Description of the application
 
