@@ -30,6 +30,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
 public class ActivityAddFoodPage extends AppCompatActivity {
 
@@ -45,6 +46,7 @@ public class ActivityAddFoodPage extends AppCompatActivity {
     Food currentFood=null;
     int grams=0;
     static String entryDate="";
+    private static ArrayList<EntryFood> entryFoods = new ArrayList<>();
 
         public static void setEntryDate(String date){
             entryDate = date;
@@ -62,6 +64,7 @@ public class ActivityAddFoodPage extends AppCompatActivity {
 
         retrieveData();
 
+        Log.i("entryfoodsTag", ""+entryFoods.get(0).getFoodName()+entryFoods.get(1).getFoodName());
 
         findViewById(R.id.addbutton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,4 +164,5 @@ public class ActivityAddFoodPage extends AppCompatActivity {
 
     }
 
+    public static void setEntryFoods(ArrayList<EntryFood> entryFoods2){entryFoods=entryFoods2;}
 }

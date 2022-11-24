@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:text="Sign Up"
         android:textAlignment="center"
-        android:textColor="#792959"
+        android:textColor="#16caaa"
         android:textStyle="bold"
         />
 
@@ -25,7 +25,7 @@
         android:text="Create new account"
         android:textAlignment="center"
         style="@style/TextAppearance.MaterialComponents.Caption"
-        android:textColor="#a23776"/>
+        android:textColor="#16caaa"/>
 
     <!--Email-->
     <com.google.android.material.textfield.TextInputLayout
@@ -72,7 +72,7 @@
         android:layout_below="@+id/passwordTil"
         android:layout_height="wrap_content"
         android:text="Sign Up"
-        android:backgroundTint="#b63e85"/>
+        android:backgroundTint="#7916CAAA"/>
 
     <TextView
         android:id="@+id/signinView"

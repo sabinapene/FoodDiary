@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:text="Sign In"
         android:textAlignment="center"
-        android:textColor="#792959"
+        android:textColor="#16caaa"
         android:textStyle="bold"
         />
 
@@ -25,7 +25,7 @@
         android:text="Sign In to your existing account"
         android:textAlignment="center"
         style="@style/TextAppearance.MaterialComponents.Caption"
-        android:textColor="#a23776"
+        android:textColor="#16caaa"
         />
 
     <!--Email-->
@@ -77,7 +77,7 @@
         android:layout_below="@+id/passwordTil"
         android:layout_marginTop="10dp"
         android:text="Sign In"
-        android:backgroundTint="#b63e85"/>
+        android:backgroundTint="#7816CAAA"/>
 
     <TextView
         android:id="@+id/createAccountView"

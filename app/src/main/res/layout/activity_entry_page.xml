@@ -17,17 +17,18 @@
         tools:layout_editor_absoluteX="20dp"
         >
 
-    <TextView
-        android:id="@+id/entrytextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Entry Date"
-        android:textSize="30dp"
-        android:textColor="#792959"
-        android:layout_gravity="center"
-        android:textStyle="bold"
+        <TextView
+            android:id="@+id/entrytextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Entry Date"
+            android:textSize="30dp"
+            android:textColor="#16caaa"
+            android:layout_gravity="center"
+            android:textStyle="bold"
 
-        />
+            />
+
 
         <androidx.recyclerview.widget.RecyclerView
 
@@ -35,17 +36,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            />
-
-        <Button
-            android:id="@+id/calculatebutton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_toRightOf="@id/entrytextView"
-            android:text="Calculate"
-            android:drawableTint="@color/white"
-            android:backgroundTint="#b63e85"
             />
 
     </LinearLayout>

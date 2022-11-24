@@ -48,6 +48,8 @@ public class ActivityEntryPage extends AppCompatActivity {
     private ArrayList<EntryFood> entryFoods= new ArrayList<>();
     private ArrayList<EntryFood> currentEntryFoods = new ArrayList<>();
 
+    private static int calories=0;
+
 
     DatabaseReference reference;
     DatabaseReference reference1;
@@ -68,14 +70,13 @@ public class ActivityEntryPage extends AppCompatActivity {
 
         entryFoods.clear();
 
-        EntryFood entryFood1 = new EntryFood("17-11-2022 10:04:07","berry", 100);
-        entryFoods.add(entryFood1);
+        TextView textView = findViewById(R.id.entrytextView);
+        textView.setText(entryDate);
 
         retrieveFoodListData();
         retrieveData();
 
-        TextView textView = findViewById(R.id.entrytextView);
-        textView.setText(entryDate);
+
 
         findViewById(R.id.addfoodfloatingActionButton).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -84,9 +85,12 @@ public class ActivityEntryPage extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), ActivityAddFoodPage.class);
                     v.getContext().startActivity(intent);
                     ActivityAddFoodPage.setEntryDate(entryDate);
+                    ActivityAddFoodPage.setEntryFoods(currentEntryFoods);
                     Log.i("tagentrydate", ""+entryDate);
 
                 }});
+
+
     }
 
 
@@ -117,36 +121,6 @@ public class ActivityEntryPage extends AppCompatActivity {
         };
         reference.addValueEventListener(valueEventListener);
     }
-
-
-    /*private void retrieveData(){
-        ValueEventListener valueEventListener = new ValueEventListener()
-        {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    entryFoods.clear();
-                    for (DataSnapshot ds: dataSnapshot.getChildren()){
-
-                        EntryFood foo = ds.getValue(EntryFood.class);
-                        foo.setId(ds.getKey());
-                        entryFoods.add(foo);
-
-                    }
-                }
-                validate();
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(ActivityEntryPage.this, "Connection Error", Toast.LENGTH_SHORT).show();
-            }
-        };
-        reference.addValueEventListener(valueEventListener);
-    }*/
-
 
     private void retrieveFoodListData(){
 
@@ -195,6 +169,7 @@ public class ActivityEntryPage extends AppCompatActivity {
         recyclerView.hasFixedSize();
         adapter = new EntryFoodsAdapter(currentEntryFoods, foods);
         recyclerView.setAdapter(adapter);
+
     }
 
 
@@ -267,8 +242,8 @@ public class ActivityEntryPage extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
-
-
+    public static void setCalories(int cal){
+        calories = cal;
+    }
 
 }

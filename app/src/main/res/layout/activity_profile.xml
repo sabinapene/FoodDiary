@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:text="You are signed in"
         style="@style/TextAppearance.MaterialComponents.Caption"
-        android:textColor="#792959"
+        android:textColor="#139F86"
         android:textSize="18dp"
         android:textStyle="bold"
         />
@@ -29,9 +29,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="WELCOME!"
+        android:textStyle="bold"
         android:layout_marginTop="5dp"
         style="@style/TextAppearance.MaterialComponents.Headline4"
-        android:textColor="#792959"/>
+        android:textColor="#139F86"/>
 
     <TextView
         android:id="@+id/changePasswordTextView"

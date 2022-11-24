@@ -23,11 +23,21 @@
         android:layout_height="wrap_content"
         android:text="ADD FOOD"
         android:textSize="30dp"
-        android:textColor="#792959"
+        android:textColor="#16caaa"
         android:layout_gravity="center"
         android:textStyle="bold"
 
         />
+        <Button
+            android:id="@+id/addbutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_toRightOf="@id/textView"
+            android:text="Add"
+            android:drawableTint="@color/white"
+            android:backgroundTint="#7816CAAA"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
 
@@ -37,16 +47,6 @@
             android:layout_marginTop="20dp"
             />
 
-        <Button
-            android:id="@+id/addbutton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_toRightOf="@id/textView"
-            android:text="Add"
-            android:drawableTint="@color/white"
-            android:backgroundTint="#b63e85"
-            />
 
     </LinearLayout>
 

@@ -3,8 +3,7 @@ xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-android:padding="20dp"
-tools:context=".ActivityChangeGameName">
+android:padding="20dp">
 
     <TextView
         android:id="@+id/textViewChangeEmail"
@@ -13,7 +12,7 @@ tools:context=".ActivityChangeGameName">
         android:layout_height="wrap_content"
         android:text="Change Email"
         android:textAlignment="center"
-        android:textColor="#792959"
+        android:textColor="#16caaa"
         android:textStyle="bold" />
 
     <TextView
@@ -24,7 +23,7 @@ tools:context=".ActivityChangeGameName">
         android:layout_below="@+id/textViewChangeEmail"
         android:text="Change your email here"
         android:textAlignment="center"
-        android:textColor="#a23776" />
+        android:textColor="#16caaa" />
 
 
     <!--New Password-->
@@ -75,7 +74,7 @@ tools:context=".ActivityChangeGameName">
         android:layout_height="wrap_content"
         android:layout_below="@+id/passwordTil"
         android:layout_marginTop="10dp"
-        android:backgroundTint="#b63e85"
+        android:backgroundTint="#7816CAAA"
         android:text="Change Email" />
 
 

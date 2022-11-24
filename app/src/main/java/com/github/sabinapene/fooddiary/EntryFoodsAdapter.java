@@ -46,9 +46,9 @@ public class EntryFoodsAdapter extends RecyclerView.Adapter<EntryFoodsAdapter.Vi
 
         int position1 = position;
         EntryFood tempFood = entryFoods.get(position1);
-        //holder.foodTextView.setText(tempFood.getFoodName()+" "+tempFood.getGrams()+" gr → "+" calories");
         holder.foodTextView.setText(tempFood.getFoodName()+" "+tempFood.getGrams()+" gr → "+searchCurrentFoodCalories(tempFood.getFoodName())*tempFood.getGrams()/100+" calories");
 
+        ActivityEntryPage.setCalories(searchTotalFoodCalories());
         holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,10 +90,21 @@ public class EntryFoodsAdapter extends RecyclerView.Adapter<EntryFoodsAdapter.Vi
 
         for (int i = 0; i < foods.size(); i++) {
             if (foods.get(i).getName().equals(name)) {
-                    calories= foods.get(i).getCalories();
+                calories= foods.get(i).getCalories();
             }
         }
         Log.i("Tag434", String.valueOf(foods.get(0).getName()));
+        return calories;
+    }
+
+    public int searchTotalFoodCalories(){
+
+         int calories = 0;
+
+        for (int i = 0; i < foods.size(); i++) {
+            calories+=foods.get(i).getCalories();
+        }
+        Log.i("totalcaltag", ""+calories);
         return calories;
     }
 }
