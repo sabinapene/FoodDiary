@@ -21,6 +21,8 @@ import com.github.sabinapene.fooddiary.Models.EntryFood;
 import com.github.sabinapene.fooddiary.Models.Food;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.components.ComponentRuntime;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -29,6 +31,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ActivityEntryPage extends AppCompatActivity {
 
@@ -37,7 +40,6 @@ public class ActivityEntryPage extends AppCompatActivity {
     static String entryID="";
     static String foodDetele="";
 
-    private DailyEntry currentEntry;
     RecyclerView recyclerView;
 
     private FirebaseDatabase db;
@@ -48,6 +50,7 @@ public class ActivityEntryPage extends AppCompatActivity {
 
 
     DatabaseReference reference;
+    DatabaseReference reference1;
     EntryFoodsAdapter adapter;
 
 
@@ -61,17 +64,15 @@ public class ActivityEntryPage extends AppCompatActivity {
         //initialising firebase authentication
         db = FirebaseDatabase.getInstance();
         reference = db.getReference("EntryFoodsList");
+        reference1 = db.getReference("Foods");
 
         entryFoods.clear();
 
         EntryFood entryFood1 = new EntryFood("17-11-2022 10:04:07","berry", 100);
         entryFoods.add(entryFood1);
 
-        //Food food1 = new Food("berry", 57);
-        //foods.add(food1);
-
-        retrieveData();
         retrieveFoodListData();
+        retrieveData();
 
         TextView textView = findViewById(R.id.entrytextView);
         textView.setText(entryDate);
@@ -83,6 +84,8 @@ public class ActivityEntryPage extends AppCompatActivity {
                     Intent intent = new Intent(getApplicationContext(), ActivityAddFoodPage.class);
                     v.getContext().startActivity(intent);
                     ActivityAddFoodPage.setEntryDate(entryDate);
+                    Log.i("tagentrydate", ""+entryDate);
+
                 }});
     }
 
@@ -102,7 +105,9 @@ public class ActivityEntryPage extends AppCompatActivity {
                         entryFoods.add(foo);
                     }
                 }
+
                 validate();
+
             }
 
             @Override
@@ -142,34 +147,29 @@ public class ActivityEntryPage extends AppCompatActivity {
         reference.addValueEventListener(valueEventListener);
     }*/
 
-    private void retrieveFoodListData(){
-        DatabaseReference reference1 = db.getReference("EntryFoodsList");
 
-        ValueEventListener valueEventListener2 = new ValueEventListener()
-        {
+    private void retrieveFoodListData(){
+
+        reference1.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.exists()){
-                    foods.clear();
-                    for (DataSnapshot ds: dataSnapshot.getChildren()){
-                        Food food = ds.getValue(Food.class);
-                        foods.add(food);
-                    }
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                foods.clear();
+                for (DataSnapshot ds: snapshot.getChildren()){
+                    Food food = ds.getValue(Food.class);
+                    foods.add(food);
                 }
+                Log.v("taggy1", ""+snapshot.getValue());
+                Log.v("taggy2", ""+foods.get(1).getName()+foods.get(1).getCalories());
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(ActivityEntryPage.this, "Connection Error", Toast.LENGTH_SHORT).show();
             }
-        };
+        });
 
-        reference1.addValueEventListener(valueEventListener2);
-
-        ArrayList<Food> foodTemp = ActivityAddFoodPage.getFoods();
-        Log.i("Tagretireve", String.valueOf(foodTemp.size()));
-
-        //foods = ActivityAddFoodPage.getFoods();
     }
 
 
@@ -184,8 +184,7 @@ public class ActivityEntryPage extends AppCompatActivity {
                     currentEntryFoods.add(foo);
                 }
             }
-            retrieveFoodListData();
-            Log.i("Tag43456", String.valueOf(foods.size()));
+            Log.i("Tag4", String.valueOf(foods.size()));
 
         }
         else{
@@ -201,13 +200,13 @@ public class ActivityEntryPage extends AppCompatActivity {
 
     private void deleteEntryFood(){
 
-            //delete from firebase
-       /* db.getReference().child("EntryFoodsList").child(foodDetele).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
-            //reference.child(foodDetele).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+        //delete from firebase
+       if(!foodDetele.equals("")){
+       db.getReference().child("EntryFoodsList").child(foodDetele).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
                     //score cleared successfully
-
+                    foodDetele = "";
                     Toast.makeText(getApplicationContext(), "Food removed", Toast.LENGTH_SHORT).show();
 
 
@@ -220,9 +219,9 @@ public class ActivityEntryPage extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
 
                         }
-                    });*/
+                    });}
 
-        Log.i("deleteTag", String.valueOf(foodDetele));
+        Log.i("deleteTag2", String.valueOf(foodDetele));
     }
 
     public static void setEntryId(String newEntryId){
@@ -240,6 +239,10 @@ public class ActivityEntryPage extends AppCompatActivity {
     public static void setFoodDelete(String newFoodDelete){
         foodDetele = newFoodDelete;
     }
+    public static String getFoodDelete(){
+        return foodDetele;
+    }
+
 
    @Override
     public boolean onCreateOptionsMenu(Menu menu)   {

@@ -9,8 +9,6 @@ public class User {
 
     private String ID="";
 
-    private ArrayList<DailyEntry> entries = new ArrayList<>();
-
     private String name ="";
 
     public User(){
@@ -30,13 +28,6 @@ public class User {
         this.name = name;
     }
 
-    /*public String getEntryID() {
-        return dailyEntryID;
-    }
-
-    public void setEntryID(String dailyEntryID) {
-        this.dailyEntryID = dailyEntryID;
-    }*/
 
     public String getID() {
         return ID;

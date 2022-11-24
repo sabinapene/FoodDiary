@@ -45,17 +45,6 @@ public class DailyEntry {
         return foods;
     }
 
-    /*public ArrayList<String> getFoodsID() {
-        ArrayList<String> foodsID = new ArrayList<>();
-        for (Integer i : foods.keySet()) {
-            foodsID.add(foods.get(i).getName());
-        }
-        return foodsID;
-    }
-
-    public void setFoodID(String foodID) {
-        this.foodID = foodID;
-    }*/
 
     public String getDate() {
         return date;
@@ -64,43 +53,5 @@ public class DailyEntry {
     public void setDate(String date) {
         this.date = date;
     }
-
-
-   /* public boolean setActivityID(String activityString) {
-       if(activityString.equals("ActivityNewPlayerPage")){
-            ActivityNewPlayerPage.setGameID(gameID);
-            return true;
-        }
-        else if (activityString.equals("ActivityScorePage")){
-            ActivityScorePage.setGameID(gameID);
-            return true;
-
-        }
-        else if (activityString.equals("ActivityChangeGameName")){
-            ActivityChangeGameName.setGameID(gameID);
-            return true;
-        }
-
-        else {
-            return false;
-        }
-        return true;
-    }
-
-    public boolean setActivityName(String activityString) {
-        if(activityString.equals("ActivityChangeGameName")){
-            ActivityChangeGameName.setGameName(name);
-            return true;
-        }
-        else if (activityString.equals("ActivityEntryPage")){
-            ActivityScorePage.setGameName(name);
-            return true;
-        }
-        else {
-            return false;
-        }
-        return true;
-    }*/
-
 
 }

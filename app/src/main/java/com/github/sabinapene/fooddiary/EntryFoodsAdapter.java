@@ -26,7 +26,6 @@ public class EntryFoodsAdapter extends RecyclerView.Adapter<EntryFoodsAdapter.Vi
 
     ArrayList<EntryFood> entryFoods = new ArrayList<>();
     ArrayList<Food> foods = new ArrayList<>();
-    Boolean checkBoxState=false;
 
     public EntryFoodsAdapter(ArrayList<EntryFood> entryFoods, ArrayList<Food> foods){
         this.entryFoods = entryFoods;
@@ -49,42 +48,20 @@ public class EntryFoodsAdapter extends RecyclerView.Adapter<EntryFoodsAdapter.Vi
         EntryFood tempFood = entryFoods.get(position1);
         //holder.foodTextView.setText(tempFood.getFoodName()+" "+tempFood.getGrams()+" gr → "+" calories");
         holder.foodTextView.setText(tempFood.getFoodName()+" "+tempFood.getGrams()+" gr → "+searchCurrentFoodCalories(tempFood.getFoodName())*tempFood.getGrams()/100+" calories");
-        /*holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
-                if(buttonView.isPressed()){
-
-                    ActivityEntryPage.setFoodDelete(tempFood.getId());
-                    for(int i = 0; i < foods.size(); i++){
-                        if(i!=position1){
-                            holder.checkBox.setSelected(false);
-                        }
-                    }
-                }
-            }
-        }
-        );*/
-
-
-        checkBoxState = holder.checkBox.isChecked();
-
-        holder.foodTextView.setOnClickListener(new View.OnClickListener() {
+        holder.checkBox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkBoxState){
+
                     EntryFood currentEntryFood = entryFoods.get(position1);
 
-                    Log.i("mytag",currentEntryFood.getId());
+                    if(ActivityEntryPage.getFoodDelete().equals(currentEntryFood.getId())){
+                        ActivityEntryPage.setFoodDelete("");
+                    } else {
                     ActivityEntryPage.setFoodDelete(currentEntryFood.getId());
-
-                    for(int i = 0; i < foods.size(); i++){
-                        if(i!=position1){
-                            holder.checkBox.setSelected(false);
-                        }
                     }
-                    checkBoxState = false;
-                }
+                Log.i("deleteTag", "adapter tag "+currentEntryFood.getId());
+
             }
         });
     }

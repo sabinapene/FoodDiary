@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,9 +23,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
@@ -92,17 +94,35 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Floating Act Btn Action goes here
+                Date date2 = new Date(); // This object contains the current date value
+                SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+                String dateString = formatter.format(date2);
+                String date = "";
+                for (int i = 0; i < 10; i++) {
+                    date += dateString.toString().charAt(i);
+                }
 
+                boolean bool = true;
+                for (int j = 0; j < entries.size(); j++) {
+                    DailyEntry item = entries.get(j);
+                    Log.i("entryTag", ""+item.getDate()+" "+date);
+
+                    if (item.getDate().equals(date)) {
+                        bool = false;
+                    }}
+
+                if (bool){
+                    bool=true;
                 addEntryFirebase();
 
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                v.getContext().startActivity(intent);
+                v.getContext().startActivity(intent);}
+                else{
+                    Toast.makeText(MainActivity.this, "Entry already exists ", Toast.LENGTH_SHORT).show();
+                }
             }});
 
-
         reference.addValueEventListener(valueEventListener);
-
-
     }
 
     private void search(){
@@ -130,16 +150,22 @@ public class MainActivity extends AppCompatActivity {
 
     private void addEntryFirebase() {
 
+
+        //set up info to add to firebase
+        Date date2 = new Date(); // This object contains the current date value
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String dateString = formatter.format(date2);
+        String date = "";
+        for (int i = 0; i < 10; i++) {
+            date += dateString.toString().charAt(i);
+        }
+
+        DailyEntry newDailyEntry = new DailyEntry("",userID, date);
+
         //initialising firebase authentication
         firebaseAuth = FirebaseAuth.getInstance();
         db = FirebaseDatabase.getInstance();
 
-        //db.getReference("DailyEntries").child("Users").orderByChild("title").equalTo(gameID);
-
-        //set up info to add to firebase
-        Date date = new Date(); // This object contains the current date value
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-        DailyEntry newDailyEntry = new DailyEntry("",userID, formatter.format(date));
 
         //add to firebase
         DatabaseReference reference = db.getReference("DailyEntries");

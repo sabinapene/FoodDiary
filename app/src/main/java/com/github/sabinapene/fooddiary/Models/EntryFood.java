@@ -7,13 +7,13 @@ public class EntryFood {
     private String entryDate ="";
     private int grams = -1;
 
-    public EntryFood(){
-
-    }
     public EntryFood(String entryDate, String name, int grams){
         this.entryDate = entryDate;
         this.foodName = name;
         this.grams = grams;
+    }
+
+    public EntryFood(){
     }
 
     public String getFoodName() {

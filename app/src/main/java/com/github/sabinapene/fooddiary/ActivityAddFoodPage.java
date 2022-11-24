@@ -50,8 +50,6 @@ public class ActivityAddFoodPage extends AppCompatActivity {
             entryDate = date;
         }
 
-        public static ArrayList<Food> getFoods(){ return  foods; }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -78,15 +76,6 @@ public class ActivityAddFoodPage extends AppCompatActivity {
 
                         if(!stringGrams.equals("")){
 
-
-                            //String name = food.getName();
-
-                            /*try {
-                                Log.d(TAG, "p"+String.valueOf(Integer.parseInt(stringGrams)));
-                            } catch (NumberFormatException e) {
-                                Log.w(TAG, "Key entered isn't Integer");
-                            }*/
-                            //int grrr = Integer.parseInt(stringGrams);
                             entryFood = new EntryFood(entryDate, food.getName(), Integer.parseInt( stringGrams ));
                             }
                     }

@@ -1,6 +1,7 @@
 package com.github.sabinapene.fooddiary;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,8 +48,6 @@ public class DailyEntryAdapter extends RecyclerView.Adapter<DailyEntryAdapter.Vi
 
         Button buttonentrydate;
 
-
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             buttonentrydate = itemView.findViewById(R.id.entrydatebutton);
@@ -61,10 +60,7 @@ public class DailyEntryAdapter extends RecyclerView.Adapter<DailyEntryAdapter.Vi
                     ActivityEntryPage.setEntryId(currentDailyEntry.getEntryID());
                     ActivityEntryPage.setEntryDate(currentDailyEntry.getDate());
                     ActivityEntryPage.setEntryID(currentDailyEntry.getEntryID());
-
-                    Intent foodIntent = new Intent(itemView.getContext(), ActivityAddFoodPage.class);
-                    foodIntent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                    v.getContext().startActivity(foodIntent);
+                    Log.i("tagentrydate", ""+currentDailyEntry.getEntryID());
 
                     Intent intent = new Intent(itemView.getContext(), ActivityEntryPage.class);
                     v.getContext().startActivity(intent);
