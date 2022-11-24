@@ -1,6 +1,7 @@
 package com.github.sabinapene.fooddiary;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -21,6 +22,9 @@ public class ActivitySignIn extends AppCompatActivity {
 
     private String email="", password="";
     private FirebaseAuth firebaseAuth;
+
+    SharedPreferences sharedPreferences;
+    private static String currentUserEmail="";
 
     private String currentUserID="";
 
@@ -96,6 +100,13 @@ public class ActivitySignIn extends AppCompatActivity {
                         Toast.makeText(ActivitySignIn.this, "Sign In Failed", Toast.LENGTH_SHORT).show();
                     }
                 });
+    }
+
+    public static void resetCurrentUserEmail() {
+        currentUserEmail = "";
+    }
+    public static void setCurrentUserEmail(String uemail) {
+        currentUserEmail = uemail;
     }
 
 }

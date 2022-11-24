@@ -61,6 +61,18 @@
                 android:value="" />
         </activity>
 
+        <activity
+            android:name=".ActivityChangePassword"
+            android:exported="false"
+            android:noHistory="true" />
+        <activity
+            android:name=".ActivityChangeEmail"
+            android:exported="false"
+            android:noHistory="true" />
+        <activity
+            android:name=".ActivityProfile"
+            android:exported="false"
+            android:noHistory="true" />
     </application>
 
 </manifest>
