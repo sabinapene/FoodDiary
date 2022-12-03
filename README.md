@@ -21,15 +21,18 @@ signing out DELIVERED
 changing email DELIVERED 
 changing password DELIVERED
 
+Changing BMI details DELIVERED
+Showing BMI Calculation DELIVERED
+
 creating a new entry DELIVERED 
 displaying a list of entries DELIVERED 
 deleting one of the entries NOT DELIVERED 
 
 displaying the daily consumed food DELIVERED 
 deleting one of the daily consumed food DELIVERED 
-change quantity of daily consumed food NOT DELIVERED
+change quantity of daily consumed food DELIVERED
 
 displaying the food from database DELIVERED
 adding food from the database into a daily entry DELIVERED
-
-creating a new food in the database NOT DELIVERED
+creating new food in database DELIVERED
+deleting created food from database NOT DELIVERED
