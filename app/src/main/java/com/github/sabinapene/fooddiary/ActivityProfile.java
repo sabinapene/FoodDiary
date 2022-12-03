@@ -26,6 +26,13 @@ public class ActivityProfile extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.changeBMITextView).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent( ActivityProfile.this, ActivityChangeBMI.class));
+            }
+        });
+
         findViewById(R.id.changeEmailTextView).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

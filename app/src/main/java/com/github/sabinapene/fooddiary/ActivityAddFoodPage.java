@@ -44,6 +44,7 @@ public class ActivityAddFoodPage extends AppCompatActivity {
     DatabaseReference reference;
     AddFoodAdapter adapter;
     Food currentFood=null;
+    EntryFood existingEntryFood=new EntryFood();
     int grams=0;
     static String entryDate="";
     private static ArrayList<EntryFood> entryFoods = new ArrayList<>();
@@ -60,11 +61,12 @@ public class ActivityAddFoodPage extends AppCompatActivity {
 
         //initialising firebase
         db = FirebaseDatabase.getInstance();
-        reference = db.getReference("Foods");
+        reference = db.getReference().child("Foods");
 
         retrieveData();
 
-        Log.i("entryfoodsTag", ""+entryFoods.get(0).getFoodName()+entryFoods.get(1).getFoodName());
+        //Log.i("foodsTag", ""+foods.get(0).getName());
+        //Log.i("entryfoodsTag", ""+entryFoods.get(0).getFoodName()+entryFoods.get(1).getFoodName());
 
         findViewById(R.id.addbutton).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,11 +78,13 @@ public class ActivityAddFoodPage extends AppCompatActivity {
 
                         Food food = foods.get(i);
                         String stringGrams = ((TextView) recyclerView.findViewHolderForAdapterPosition(i).itemView.findViewById(R.id.addfoodedittext)).getText().toString();
+                        Log.i("entryfoodTag", ""+stringGrams);
 
                         if(!stringGrams.equals("")){
 
                             entryFood = new EntryFood(entryDate, food.getName(), Integer.parseInt( stringGrams ));
-                            }
+                            Log.i("entryfoodTag", ""+entryFood.getFoodName());
+                        }
                     }
                     if(entryFood!=null){
                         addEntryFoodFirebase(entryFood);
@@ -106,8 +110,8 @@ public class ActivityAddFoodPage extends AppCompatActivity {
                     for (DataSnapshot ds: dataSnapshot.getChildren()){
 
                         Food food = ds.getValue(Food.class);
-                        //Food food = new Food("berries", 100);
                         foods.add(food);
+                        Log.i("foodsTag", ""+food.getName());
 
                     }
 
@@ -136,10 +140,62 @@ public class ActivityAddFoodPage extends AppCompatActivity {
 
         //initialising firebase
         db = FirebaseDatabase.getInstance();
+        DatabaseReference reference1 = db.getReference("EntryFoodsList");
+
+        /*ValueEventListener valueEventListener = new ValueEventListener()
+        {
+
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    for (DataSnapshot ds: dataSnapshot.getChildren()){
+
+                        EntryFood efood = ds.getValue(EntryFood.class);
+                        if(efood.getEntryDate().equals(foo.getEntryDate())){
+                            if(efood.getFoodName().equals(foo.getFoodName())){
+                                efood.setId(ds.getKey());
+                                existingEntryFood=efood;
+                            }
+                        }
+
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(ActivityAddFoodPage.this, "Connection Error", Toast.LENGTH_SHORT).show();
+
+            }
+        };
+
+        reference1.addValueEventListener(valueEventListener);*/
+
+        for(int i =0; i<entryFoods.size(); i++){
+            if(entryFoods.get(i).getEntryDate().equals(foo.getEntryDate())){
+                if(entryFoods.get(i).getFoodName().equals(foo.getFoodName())){
+                        existingEntryFood=entryFoods.get(i);
+                    //delete in firebase
+                    db.getReference().child("EntryFoodsList").child(existingEntryFood.getId()).removeValue().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void unused) {
+
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    //failure
+
+                                }
+                            });
+                }
+
+            }
+        }
 
 
         //add to firebase
-        DatabaseReference reference1 = db.getReference("EntryFoodsList");
         reference1.push().setValue(foo)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
@@ -150,7 +206,6 @@ public class ActivityAddFoodPage extends AppCompatActivity {
                         //open ActivityEntryPage
                         //startActivity(new Intent(ActivityAddFoodPage.this, ActivityEntryPage.class));
                         finish();
-
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -162,7 +217,10 @@ public class ActivityAddFoodPage extends AppCompatActivity {
                     }
                 });
 
+
     }
 
     public static void setEntryFoods(ArrayList<EntryFood> entryFoods2){entryFoods=entryFoods2;}
+
+
 }

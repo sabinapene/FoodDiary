@@ -1,6 +1,7 @@
 package com.github.sabinapene.fooddiary;
 
 
+import android.app.Activity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -236,6 +237,17 @@ public class ActivityEntryPage extends AppCompatActivity {
         {
             case R.id.deleteEntryItem:
                 deleteEntryFood();
+                break;
+
+            case R.id.caloriesItem:
+                ActivityCalories.setCalories(calories);
+                Toast.makeText(ActivityEntryPage.this, "Total Calories", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), ActivityCalories.class));
+                break;
+
+            case R.id.createFoodItem:
+                Toast.makeText(ActivityEntryPage.this, "Create Food", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), ActivityCreateFood.class));
                 break;
         }
 

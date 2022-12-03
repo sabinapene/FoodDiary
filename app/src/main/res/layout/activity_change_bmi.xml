@@ -1,0 +1,113 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:padding="20dp">
+
+    <TextView
+        android:id="@+id/textViewChangeBMI"
+        style="@style/TextAppearance.MaterialComponents.Headline4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Change BMI Details"
+        android:textAlignment="center"
+        android:textColor="#16caaa"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewBMICaption"
+        style="@style/TextAppearance.MaterialComponents.Caption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewChangeBMI"
+        android:text="Change your weight and height"
+        android:textAlignment="center"
+        android:textColor="#16caaa" />
+
+    <TextView
+        android:id="@+id/textViewChangeBMICaption"
+        style="@style/TextAppearance.MaterialComponents.Caption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewBMICaption"
+        android:padding="20dp"
+        android:textAlignment="center"
+        android:text="BMI is an inexpensive and easy screening method for weight category—underweight, healthy weight, overweight, and obesity."
+        android:textSize="18dp"
+        android:textColor="#16caaa" />
+
+
+    <!--WEIGHT-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/weightTil"
+        android:layout_width="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/textViewWeight"
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Your weight is 0 kg"
+            android:textSize="20dp"
+            android:textColor="#16caaa"
+            android:layout_above="@+id/seekBarWeight"/>
+
+        <SeekBar
+            android:id="@+id/seekBarWeight"
+            android:layout_width="369dp"
+            android:layout_height="wrap_content"
+            android:max="300"
+            android:padding="20dp"            />
+
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <!--HEIGHT-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/newHeightTil"
+        android:layout_width="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/weightTil">
+
+        <TextView
+            android:id="@+id/textViewHeight"
+            style="@style/TextAppearance.MaterialComponents.Caption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/seekBarHeight"
+            android:text="Your height is 0 cm"
+            android:textSize="20dp"
+            android:textColor="#16caaa" />
+
+        <SeekBar
+            android:id="@+id/seekBarHeight"
+            android:layout_width="369dp"
+            android:layout_height="wrap_content"
+            android:max="300"
+            android:padding="20dp"/>
+
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <!--Save button-->
+    <Button
+        android:id="@+id/saveBMIBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/newHeightTil"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="#7816CAAA"
+        android:text="Save" />
+
+
+
+
+</RelativeLayout>

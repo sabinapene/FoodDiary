@@ -70,7 +70,24 @@
             android:exported="false"
             android:noHistory="true" />
         <activity
+            android:name=".ActivityChangeBMI"
+            android:exported="false"
+            android:noHistory="true" />
+        <activity
+            android:name=".ActivityBMI"
+            android:exported="false"
+            android:noHistory="true" />
+        <activity
+            android:name=".ActivityCalories"
+            android:exported="false"
+            android:noHistory="true" />
+        <activity
             android:name=".ActivityProfile"
+            android:exported="false"
+            android:noHistory="true" />
+
+        <activity
+            android:name=".ActivityCreateFood"
             android:exported="false"
             android:noHistory="true" />
     </application>

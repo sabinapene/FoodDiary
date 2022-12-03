@@ -11,10 +11,14 @@ public class User {
 
     private String name ="";
 
+    private int height=0;
+
+    private int weight=0;
+
     public User(){
 
     }
-    public User(String ID, String name, int score){
+    public User(String ID, String name){
 
         this.ID = ID;
         this.name = name;
@@ -35,5 +39,21 @@ public class User {
 
     public void setID(String ID) {
         this.ID = ID;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
     }
 }

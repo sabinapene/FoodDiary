@@ -39,8 +39,8 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<DailyEntry> entries = new ArrayList<DailyEntry>();
     private ArrayList<DailyEntry> currentEntries = new ArrayList<DailyEntry>();
     private String  userID;
-    DatabaseReference reference;
-    DailyEntryAdapter adapter;
+    private DatabaseReference reference;
+    private DailyEntryAdapter adapter;
 
 
     @Override
@@ -211,6 +211,11 @@ public class MainActivity extends AppCompatActivity {
             case R.id.profileItem:
                 Toast.makeText(MainActivity.this, "Profile", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(getApplicationContext(), ActivityProfile.class));
+                break;
+
+            case R.id.bmiItem:
+                Toast.makeText(MainActivity.this, "BMI", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(getApplicationContext(), ActivityBMI.class));
                 break;
         }
 

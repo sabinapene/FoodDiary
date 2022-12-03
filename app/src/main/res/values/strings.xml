@@ -7,6 +7,7 @@
     <string name="already_have_an_account_sign_in">Already have an account? <b>Sign in</b> </string>
     <string name="change_your_password">Change your <b>password</b> </string>
     <string name="change_your_email">Change your <b>email</b> </string>
+    <string name="change_your_bmi">Change your <b>BMI DETAILS</b> </string>
     <string name="title_activity_sign_up">ActivitySignUp</string>
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
@@ -14,6 +15,6 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+
+    <string name="BMITable"><b>BMI	Weight            Status</b>\n\nBelow 18.5             Underweight\n18.5 – 24.9             Healthy Weight\n25.0 – 29.9	            Overweight\n30.0 and Above      Obesity</string>
 </resources>

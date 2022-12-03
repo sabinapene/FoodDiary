@@ -7,6 +7,14 @@
         android:id="@+id/deleteEntryItem"
         app:showAsAction="collapseActionView"
         android:title="Delete Entry" />
+    <item
+        android:id="@+id/caloriesItem"
+        app:showAsAction="collapseActionView"
+        android:title="Total Calories" />
+    <item
+        android:id="@+id/createFoodItem"
+        app:showAsAction="collapseActionView"
+        android:title="Create Food" />
 
 
 </menu>

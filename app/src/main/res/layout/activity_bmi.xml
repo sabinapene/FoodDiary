@@ -1,0 +1,56 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:padding="20dp">
+
+    <TextView
+        android:id="@+id/textViewBMI"
+        style="@style/TextAppearance.MaterialComponents.Headline4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="BMI Details"
+        android:textAlignment="center"
+        android:textColor="#16caaa"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewBMICaption2"
+        style="@style/TextAppearance.MaterialComponents.Caption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewBMI"
+        android:text="According to your weight and height"
+        android:textAlignment="center"
+        android:textColor="#16caaa" />
+
+    <TextView
+        android:id="@+id/textViewBMITable"
+        style="@style/TextAppearance.MaterialComponents.Caption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewBMICaption2"
+        android:padding="40dp"
+        android:text="BMI	Weight            Status\n\nBelow 18.5             Underweight\n18.5 – 24.9             Healthy Weight\n25.0 – 29.9	            Overweight\n30.0 and Above      Obesity"
+
+    android:textSize="18dp"
+        android:textColor="#16caaa" />
+
+    <TextView
+        android:id="@+id/textViewBMIResult"
+        style="@style/TextAppearance.MaterialComponents.Caption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewBMITable"
+        android:padding="20dp"
+        android:text="Your current BMI is 0"
+        android:textSize="18dp"
+        android:textColor="#16caaa" />
+
+
+
+
+
+
+</RelativeLayout>

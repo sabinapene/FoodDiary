@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:padding="20dp">
+
+    <TextView
+        android:id="@+id/textViewCalories"
+        style="@style/TextAppearance.MaterialComponents.Headline4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Calories"
+        android:textAlignment="center"
+        android:textColor="#16caaa"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textViewBMICaption3"
+        style="@style/TextAppearance.MaterialComponents.Caption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewCalories"
+        android:text="Total daily calories"
+        android:textAlignment="center"
+        android:textColor="#16caaa" />
+
+    <TextView
+        android:id="@+id/textViewTotalCalories"
+        style="@style/TextAppearance.MaterialComponents.Caption"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textViewBMICaption3"
+        android:padding="40dp"
+        android:text="Your total caloric consumption is "
+        android:textSize="18dp"
+        android:textColor="#16caaa" />
+
+
+
+
+
+
+</RelativeLayout>

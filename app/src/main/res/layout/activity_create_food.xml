@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?><RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    tools:context=".ActivitySignIn">
+
+    <TextView
+        android:id="@+id/textViewCreateFood"
+        style="@style/TextAppearance.MaterialComponents.Headline4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Food"
+        android:textAlignment="center"
+        android:textColor="#16caaa"
+        android:textStyle="bold"
+        />
+
+    <TextView
+        android:id="@+id/textViewCreateFoodDescription"
+        android:layout_below="@+id/textViewCreateFood"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Create Your own Custom Food"
+        android:textAlignment="center"
+        style="@style/TextAppearance.MaterialComponents.Caption"
+        android:textColor="#16caaa"
+        />
+
+    <!--Name-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nameTil"
+        android:layout_width="match_parent"
+        android:layout_above="@+id/caloriesTil"
+        android:layout_marginBottom="10dp"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/nameEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name"
+            android:text=""
+            tools:ignore="SpeakableTextPresentCheck"
+            android:backgroundTint="#e8fffb"
+            />
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!--Calories-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/caloriesTil"
+        android:layout_width="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/caloriesEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Calories/100 gr"
+            android:text=""
+            tools:ignore="SpeakableTextPresentCheck"
+            android:backgroundTint="#e8fffb"
+            />
+
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!--SignIn button-->
+    <Button
+        android:id="@+id/createFoodBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/caloriesTil"
+        android:layout_marginTop="10dp"
+        android:text="Create Food"
+        android:backgroundTint="#7816CAAA"/>
+
+
+</RelativeLayout>
