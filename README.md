@@ -29,6 +29,7 @@ displaying a list of entries DELIVERED
 deleting one of the entries NOT DELIVERED 
 
 displaying the daily consumed food DELIVERED 
+displaying the daily caloric sum DELIVERED 
 deleting one of the daily consumed food DELIVERED 
 change quantity of daily consumed food DELIVERED
 
