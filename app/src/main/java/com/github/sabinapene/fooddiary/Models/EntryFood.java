@@ -44,4 +44,11 @@ public class EntryFood {
 
     public void setEntryDate(String entryDate){ this.entryDate = entryDate; }
 
+    public int calculateCalories(int calories){
+
+        int totalCalories = Integer.parseInt(String.valueOf(calories*grams/100));
+
+        return totalCalories;
+    }
+
 }

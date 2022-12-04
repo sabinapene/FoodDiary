@@ -6,7 +6,7 @@
     <item
         android:id="@+id/deleteEntryItem"
         app:showAsAction="collapseActionView"
-        android:title="Delete Entry" />
+        android:title="Delete Food Entry" />
     <item
         android:id="@+id/caloriesItem"
         app:showAsAction="collapseActionView"

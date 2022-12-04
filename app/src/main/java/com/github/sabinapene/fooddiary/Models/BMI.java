@@ -41,4 +41,12 @@ public class BMI {
     public void setWeight(int weight) {
         this.weight = weight;
     }
+
+    public float calculateBMI(){
+        int heightMeters=height/100;
+        int heightCm = height%100;
+        String heightStr = ""+ heightMeters +"."+heightCm;
+
+        return weight/(Float.parseFloat(heightStr)*Float.parseFloat(heightStr));
+    }
 }

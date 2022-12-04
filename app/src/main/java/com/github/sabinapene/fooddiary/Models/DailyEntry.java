@@ -12,7 +12,6 @@ public class DailyEntry {
     private String entryID = "";
     private String userID = "";
     private String date = "";
-    private HashMap<Integer, Food> foods = new HashMap<Integer, Food>();
 
     public DailyEntry(){
 
@@ -41,10 +40,6 @@ public class DailyEntry {
         this.entryID = entryID;
     }
 
-    public HashMap getFoods() {
-        return foods;
-    }
-
 
     public String getDate() {
         return date;
@@ -52,6 +47,25 @@ public class DailyEntry {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public int calculateSumOfCalories(ArrayList<EntryFood> list, ArrayList<Food> foodList){
+
+        int caloriesSum=0;
+
+        for (int i=0; i<list.size(); i++){
+            int calories=0;
+            EntryFood tempEntryFood = list.get(i);
+            for(int j=0; j<foodList.size(); j++){
+                Food tempFood = foodList.get(j);
+                if(tempFood.getName().equals(tempEntryFood.getFoodName())){
+                    calories=tempFood.getCalories();
+                }
+            }
+            caloriesSum += tempEntryFood.calculateCalories(calories);
+        }
+        return caloriesSum;
+
     }
 
 }
