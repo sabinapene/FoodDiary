@@ -37,3 +37,5 @@ displaying the food from database DELIVERED
 adding food from the database into a daily entry DELIVERED
 creating new food in database DELIVERED
 deleting created food from database NOT DELIVERED
+
+Link to the youtube presentation https://youtu.be/D3D1SmaC-b4
