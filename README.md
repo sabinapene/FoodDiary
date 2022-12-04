@@ -29,6 +29,7 @@ displaying a list of entries DELIVERED
 deleting one of the entries NOT DELIVERED 
 
 displaying the daily consumed food DELIVERED 
+displaying the daily caloric sum DELIVERED 
 deleting one of the daily consumed food DELIVERED 
 change quantity of daily consumed food DELIVERED
 
@@ -36,3 +37,5 @@ displaying the food from database DELIVERED
 adding food from the database into a daily entry DELIVERED
 creating new food in database DELIVERED
 deleting created food from database NOT DELIVERED
+
+Link to the youtube presentation https://youtu.be/D3D1SmaC-b4
